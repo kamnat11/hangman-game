@@ -72,13 +72,10 @@ def play():
         used_letters.append(guess)
 
         if guess in word:
-            update_word(word, display, guess)
+            display = update_word(word, display, guess)
             print(f"Nice! '{guess}' is correct.")
         else:
             lives -= 1
-            if guess not in word:
-                lives -= 1
-
             print(f"Oops! '{guess}' is not in the word.")
             print("Lives left:", lives)
             print(hangman_art.stages[lives])
@@ -87,9 +84,9 @@ def play():
         print("Used letters:", ", ".join(used_letters))
 
         if "_" not in display:
-            print(f"\n🎉 You won! The word was '{word}'")
+            print(f"\n You won! The word was '{word}'")
 
-    print(f"\n💀 Game over! The word was '{word}'")
+    print(f"\n Game over! The word was '{word}'")
 
 
 play()
