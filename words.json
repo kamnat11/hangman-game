@@ -1,0 +1,5 @@
+{
+    "easy": ["cat", "dog", "sun", "hat", "pen", "cup", "bat", "fan", "map", "arm"],
+    "medium": ["apple", "mango", "grape", "piano", "tiger", "ocean", "forest", "silver", "python", "market"],
+    "hard": ["algorithm", "developer", "keyboard", "programming", "encryption", "recursion", "debugging", "framework", "deployment", "authentication"]
+}
