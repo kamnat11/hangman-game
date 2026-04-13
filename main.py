@@ -18,7 +18,7 @@ def get_input(used_letters):
         guess = input("Enter a letter: ").lower()
 
         if len(guess) != 1 or not guess.isalpha():
-            print("Please enter only ONE valid letter.")
+            print("Please enter a single valid letter.")
         elif guess in used_letters:
             print("You already tried this letter.")
         else:
@@ -33,22 +33,22 @@ def update_word(word, display, guess):
 
 
 def select_level():
-    print("Choose difficulty:")
-    print("1 - Easy")
-    print("2 - Medium")
-    print("3 - Hard")
+    while True:
+        print("\nChoose difficulty:")
+        print("1 - Easy")
+        print("2 - Medium")
+        print("3 - Hard")
 
-    choice = input("Your choice: ").strip()
+        choice = input("Your choice: ").strip()
 
-    if choice == "1":
-        return "easy"
-    elif choice == "2":
-        return "medium"
-    elif choice == "3":
-        return "hard"
-    else:
-        print("Invalid choice, setting to Medium.")
-        return "medium"
+        if choice == "1":
+            return "easy"
+        elif choice == "2":
+            return "medium"
+        elif choice == "3":
+            return "hard"
+        else:
+            print("Invalid input, please try again.")
 
 
 def play():
@@ -62,31 +62,41 @@ def play():
     used_letters = []
     lives = 6
 
-    print("\nLet's start!")
+    print("\nGame started!")
     print("Word length:", len(word))
     print(" ".join(display))
-    print(hangman_art.stages[lives])
 
     while lives > 0:
+        print("\nLives left:", lives)
+        print(hangman_art.stages[lives])
+
         guess = get_input(used_letters)
         used_letters.append(guess)
 
         if guess in word:
-            display = update_word(word, display, guess)
+            update_word(word, display, guess)
             print(f"Nice! '{guess}' is correct.")
         else:
             lives -= 1
             print(f"Oops! '{guess}' is not in the word.")
-            print("Lives left:", lives)
-            print(hangman_art.stages[lives])
 
-        print(" ".join(display))
-        print("Used letters:", ", ".join(used_letters))
+        print("Word:", " ".join(display))
+        print("Used letters:", ", ".join(sorted(used_letters)))
 
         if "_" not in display:
-            print(f"\n You won! The word was '{word}'")
+            print(f"\n🎉 You won! The word was '{word}'")
+            return
 
-    print(f"\n Game over! The word was '{word}'")
+    print(f"\n💀 Game over! The word was '{word}'")
 
 
-play()
+def main():
+    while True:
+        play()
+        again = input("\nDo you want to play again? (y/n): ").lower()
+        if again != "y":
+            print("Thanks for playing!")
+            break
+
+
+main()
